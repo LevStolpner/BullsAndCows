@@ -14,6 +14,7 @@ fun startGame() {
 fun startPlayerGuessingGame() {
     val digits = pickDigits()
     println("I picked a 4-digit number.")
+    println(digits.contentToString())
 
     var isGameFinished = false
     while (!isGameFinished) {
@@ -23,10 +24,15 @@ fun startPlayerGuessingGame() {
         if (chars.size != 4 || chars.any { c -> !c.isDigit() }
                 || chars.any { c -> chars.count { it == c } > 1 }) {
             println("Incorrect input. Try again.")
+            continue
         }
-        checkBullsAndCows(digits, chars.map { c -> c.digitToInt() }.toIntArray())
-
+        val (bulls, cows) = checkBullsAndCows(digits, chars.map { c -> c.digitToInt() }.toIntArray())
+        println("Result: bulls=${bulls}, cows=${cows}")
+        if (bulls == 4) {
+            isGameFinished = true
+        }
     }
+    println("Nice game.")
 }
 
 fun pickDigits(): IntArray {
@@ -41,9 +47,24 @@ fun pickDigits(): IntArray {
 }
 
 fun checkBullsAndCows(pickedDigits: IntArray,
-                      guessedDigits: IntArray) {
+                      guessedDigits: IntArray): CheckResult {
+    var bullsCount = 0
+    var cowsCount = 0
 
+    for (i in 0..3) {
+        if (guessedDigits[i] == pickedDigits[i]) {
+            bullsCount++
+            continue
+        }
+        if (pickedDigits.any { d -> d == guessedDigits[i] }) {
+            cowsCount++
+        }
+    }
+
+    return CheckResult(bullsCount, cowsCount)
 }
+
+data class CheckResult(val bulls: Int, val cows: Int)
 
 fun startComputerGuessingGame() {
 
