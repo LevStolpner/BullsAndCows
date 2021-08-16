@@ -6,15 +6,19 @@ fun main() {
 
 fun startGame() {
     println("Let's play Bulls and Cows!")
-    println("First you can try to guess my number")
-    startPlayerGuessingGame()
-
+    println()
+    while (true) {
+        startPlayerGuessingGame()
+        startComputerGuessingGame()
+    }
 }
 
 fun startPlayerGuessingGame() {
+    println("Now you can try to guess my number.")
+
     val digits = pickDigits()
     println("I picked a 4-digit number.")
-    println(digits.contentToString())
+    println()
 
     var isGameFinished = false
     while (!isGameFinished) {
@@ -33,6 +37,16 @@ fun startPlayerGuessingGame() {
         }
     }
     println("Nice game.")
+    println()
+}
+
+fun startComputerGuessingGame() {
+    println("Now you can pick a number and I will try to guess it.")
+    print("Enter anything if you already picked your 4 digits")
+    readLine()
+
+    println("Nice game.")
+    println()
 }
 
 fun pickDigits(): IntArray {
@@ -65,7 +79,3 @@ fun checkBullsAndCows(pickedDigits: IntArray,
 }
 
 data class CheckResult(val bulls: Int, val cows: Int)
-
-fun startComputerGuessingGame() {
-
-}
