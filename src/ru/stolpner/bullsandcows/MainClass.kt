@@ -60,7 +60,7 @@ fun startComputerGuessingGame() {
     while (!isGameFinished) {
         val guess = setOfOptions.random()
         println("My guess: ${guess.contentToString()}")
-        println("Enter, how many bulls in my guess: ")
+        print("Enter, how many bulls in my guess: ")
         val bulls = readLine()?.toIntOrNull()
         if (bulls == null || bulls !in (0..4)) {
             println("Incorrect input. Try again.")
@@ -72,7 +72,7 @@ fun startComputerGuessingGame() {
             isGameFinished = true
         }
 
-        println("Enter, how many cows in my guess: ")
+        print("Enter, how many cows in my guess: ")
         val cows = readLine()?.toIntOrNull()
         if (cows == null || cows !in (0..4) || bulls.plus(cows) > 4) {
             println("Incorrect input. Try again.")
