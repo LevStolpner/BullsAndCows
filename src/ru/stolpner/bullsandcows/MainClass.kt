@@ -8,8 +8,14 @@ fun startGame() {
     println("Let's play Bulls and Cows!")
     println()
     while (true) {
-        startPlayerGuessingGame()
-        startComputerGuessingGame()
+        println("Enter anything, if you want to guess my number.")
+        println("Enter nothing, if you want me to guess your number.")
+        val input = readLine()
+        if (input.isNullOrBlank()) {
+            startComputerGuessingGame()
+        } else {
+            startPlayerGuessingGame()
+        }
     }
 }
 
@@ -46,17 +52,7 @@ fun startComputerGuessingGame() {
     readLine()
     println("OK, let's begin.")
 
-    //let's now use THE BEST algorithm here
-    //remember, I am just trying to learn Kotlin :)
-    //we'll say at the beginning we have all the possible combinations
-    //after each guess we will reduce the number of possible combinations according to player's response on bulls and cows
-    //each guess is made random from all remaining possible combinations
-    //we continue guessing until we have 1 option remaining
-    //so what's to program?
-    //1) cycle with exit conditions 3) reducing the possibilities
-
     var setOfOptions = createSetOfAllOptions()
-
     var isGameFinished = false
     while (!isGameFinished) {
         val guess = setOfOptions.random()
@@ -67,6 +63,12 @@ fun startComputerGuessingGame() {
             println("Incorrect input. Try again.")
             continue
         }
+        if (bulls == 4) {
+            println("I found your number!")
+            println("Your number is: ${guess.contentToString()}")
+            isGameFinished = true
+        }
+
         println("Enter, how many cows in my guess: ")
         val cows = readLine()?.toIntOrNull()
         if (cows == null || cows !in (0..4) || bulls.plus(cows) > 4) {
