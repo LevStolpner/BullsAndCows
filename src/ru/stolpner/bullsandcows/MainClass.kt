@@ -27,6 +27,7 @@ fun startPlayerGuessingGame() {
     println()
 
     var isGameFinished = false
+    var roundsPlayed = 0
     while (!isGameFinished) {
         print("Your guess: ")
         val input = readLine() ?: ""
@@ -41,8 +42,9 @@ fun startPlayerGuessingGame() {
         if (bulls == 4) {
             isGameFinished = true
         }
+        roundsPlayed++
     }
-    println("Nice game.")
+    println("Nice game. You guessed my number in $roundsPlayed rounds")
     println()
 }
 
@@ -54,6 +56,7 @@ fun startComputerGuessingGame() {
 
     var setOfOptions = createSetOfAllOptions()
     var isGameFinished = false
+    var roundsPlayed = 0
     while (!isGameFinished) {
         val guess = setOfOptions.random()
         println("My guess: ${guess.contentToString()}")
@@ -90,9 +93,11 @@ fun startComputerGuessingGame() {
             println("Your number is: ${setOfOptions.first().contentToString()}")
             isGameFinished = true
         }
+
+        roundsPlayed++
     }
 
-    println("Nice game.")
+    println("Nice game. I guessed your number in $roundsPlayed rounds")
     println()
 }
 
