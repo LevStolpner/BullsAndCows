@@ -77,7 +77,7 @@ fun startComputerGuessingGame() {
         }
 
         setOfOptions = setOfOptions.filter { option -> isPossibleSolution(option, guess, bulls, cows)}.toMutableSet()
-        println(setOfOptions.size)
+        println("Hmm, that's good...Only ${setOfOptions.size} options left")
 
         if (setOfOptions.size == 0) {
             println("Oops. I have now idea what your number could be :( " +
@@ -130,10 +130,7 @@ fun pickRandomDigits(): IntArray {
     return digits
 }
 
-fun checkBullsAndCows(
-    pickedDigits: IntArray,
-    guessedDigits: IntArray
-): CheckResult {
+fun checkBullsAndCows(pickedDigits: IntArray, guessedDigits: IntArray): CheckResult {
     var bullsCount = 0
     var cowsCount = 0
 
